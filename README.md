@@ -61,3 +61,7 @@ This is a automation architecture for C# language.
  
 ### Docker Compose
 
+    ```cd path/to/selenium_python_tests
+    docker-compose up -d --scale chrome=3
+    ```
+
