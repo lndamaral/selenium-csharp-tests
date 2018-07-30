@@ -55,7 +55,7 @@ This is a automation architecture for C# language.
  
     Set `True` at `<add key="Remote" value="   [here]   " />` in app.config file.
     
- 3. parallel Execution
+ 3. Parallel Execution
  
     Set `[assembly: LevelOfParallelism(   [here]   )]" />` the number of parallel executions in AssemblyInfo.cs file.
  
