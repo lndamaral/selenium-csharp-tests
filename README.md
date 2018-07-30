@@ -49,10 +49,15 @@ This is a automation architecture for C# language.
 
  1. Local Execution
  
-    Set `False` at `<add key="Remote" value="[here]" />`
+    Set `False` at `<add key="Remote" value="[here]" />` in app.config file.
     
  2. Remote Execution
+ 
+    Set `True` at `<add key="Remote" value="[here]" />` in app.config file.
+    
  3. parallel Execution
+ 
+    Set `[assembly: LevelOfParallelism([*here*])]" />` the number of parallel executions in AssemblyInfo.cs file.
  
 ### Docker Compose
 
