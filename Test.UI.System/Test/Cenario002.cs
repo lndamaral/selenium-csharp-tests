@@ -13,8 +13,8 @@ namespace Test.Selenium.Sistema.Test
         {
             Login _loginPage = new Login(_driver);
 
-            _loginPage.PreencherUsuario("fernandaaguilar");
-            _loginPage.PreencherSenha("olesenha01");
+            _loginPage.PreencherUsuario("usuario.teste2");
+            _loginPage.PreencherSenha("123456");
             _loginPage.ClicarAcessar();
         }
     }

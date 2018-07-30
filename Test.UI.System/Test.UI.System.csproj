@@ -7,8 +7,8 @@
     <Platform Condition=" '$(Platform)' == '' ">x86</Platform>
     <ProjectGuid>{781ED8A0-2629-4236-934F-AB44E475C1DC}</ProjectGuid>
     <OutputType>Library</OutputType>
-    <RootNamespace>Test.Selenium.Sistema</RootNamespace>
-    <AssemblyName>Test.Selenium.Sistema</AssemblyName>
+    <RootNamespace>Test.UI.System</RootNamespace>
+    <AssemblyName>Test.UI.System</AssemblyName>
     <TargetFrameworkVersion>v4.6.1</TargetFrameworkVersion>
     <NuGetPackageImportStamp>
     </NuGetPackageImportStamp>
