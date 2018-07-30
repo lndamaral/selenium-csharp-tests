@@ -53,7 +53,7 @@ This is a automation architecture for C# language.
     
  2. Remote Execution
  
-    Set `True` at `<add key="Remote" value="   [here]   " />` in app.config file.
+    Set `True` at `<add key="Remote" value="   [here]   " />` in app.config file and make sure the Selenium Server is up and running at URL set at `<add key="SeleniumServerURL" value="http://localhost:4444/wd/hub"/>`.
     
  3. Parallel Execution
  
