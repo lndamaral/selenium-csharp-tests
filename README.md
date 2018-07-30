@@ -66,4 +66,3 @@ This is a automation architecture for C# language.
     
     docker-compose up -d --scale chrome=3
     ```
-
