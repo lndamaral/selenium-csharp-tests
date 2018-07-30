@@ -38,9 +38,9 @@ This is a automation architecture for C# language.
             [PageName]Page.cs
 
         Test/                            # Folder where test cases are kept.
-            [TestName]Test.py
-            [TestName]Test.py
-            [TestName]Test.py
+            [TestName]Test.cs
+            [TestName]Test.cs
+            [TestName]Test.cs
 
         app.config                       # File where all variables needed to run the tests are kept.
         AssemblyInfo.cs                  # File where the level of parallelism is set.
