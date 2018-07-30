@@ -48,6 +48,9 @@ This is a automation architecture for C# language.
 ### Test Execution
 
  1. Local Execution
+ 
+    Set `False` at `<add key="Remote" value="[here]" />`
+    
  2. Remote Execution
  3. parallel Execution
  
