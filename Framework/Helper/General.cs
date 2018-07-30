@@ -1,6 +1,5 @@
 ﻿using System;
 using System.Collections;
-using System.Collections.Generic;
 using System.IO;
 using System.Threading;
 using NUnit.Framework;
@@ -20,13 +19,13 @@ namespace Framework.Helper
             return DateTime.Today.AddDays(Convert.ToDouble(addDays)).ToString(format);
         }
 
-        public static void ScrollTo(IWebElement element)
+        public static void ScrollTo(IWebDriver driver, IWebElement element)
         {
-            ((IJavaScriptExecutor)DriverFactory.Instance).ExecuteScript("arguments[0].scrollIntoView(true); ", element);
+            ((IJavaScriptExecutor) driver).ExecuteScript("arguments[0].scrollIntoView(true); ", element);
             Thread.Sleep(500);
         }
 
-        public static string TakeScreenshot()
+        public static string TakeScreenshot(IWebDriver driver)
         {
             var dateTime = GetCurrentDate("yyyy-MM-dd");
             var testName = TestContext.CurrentContext.Test.Name;
@@ -38,7 +37,7 @@ namespace Framework.Helper
             var tempo = string.Format("{0:yyyy-MM-dd-hh-mm-ss}", DateTime.Now);
             var fileName = screenshotPath + "\\" + dateTime + "\\" + tempo + "-" + testName + ".png";
 
-            ((ITakesScreenshot)DriverFactory.Instance).GetScreenshot().SaveAsFile(fileName, ScreenshotImageFormat.Png);
+            ((ITakesScreenshot) driver).GetScreenshot().SaveAsFile(fileName, ScreenshotImageFormat.Png);
 
             return fileName;
         }
@@ -55,6 +54,11 @@ namespace Framework.Helper
                     yield return result;
                 }
             }
+        }
+
+        public static int Parallelism(string key)
+        {
+         return    1;
         }
     }
 }

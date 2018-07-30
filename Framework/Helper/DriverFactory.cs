@@ -7,35 +7,46 @@ namespace Framework.Helper
 {
     public class DriverFactory
     {
-        public static IWebDriver Instance { get; set; }
-
-        static DriverFactory()
+        private IWebDriver _driver;
+        
+        public DriverFactory()
         {
-            Instance = null;
+            _driver = null;
         }
 
-        public static void Initialize(string browser)
+        public IWebDriver Initialize(string browser)
         {
             double timeout = Convert.ToDouble(ConfigurationManager.AppSettings["DefaultTimeout"]);
 
-            if (browser.Equals("Chrome"))
+            if (_driver == null)
             {
-                Instance = Chrome.Build();
+                if (browser.Equals("Chrome"))
+                {
+                    if (Convert.ToBoolean(ConfigurationManager.AppSettings["Remote"]))
+                    {
+                        _driver = Chrome.Build();
+                    }
+                    else
+                    {
+                        _driver = Chrome.BuildLocal();
+                    }
+                }
+
+                else if (browser.Equals("Firefox"))
+                {
+                    _driver = Firefox.Build();
+                }
+
+                else
+                {
+                    throw new Exception("Driver não suportado!");
+                }
             }
 
-            else if (browser.Equals("Firefox"))
-            {
-                Instance = Firefox.Build();
-            }
+            _driver.Manage().Timeouts().ImplicitWait = TimeSpan.FromSeconds(timeout);
+            _driver.Manage().Timeouts().PageLoad = TimeSpan.FromSeconds(timeout);
 
-            else
-            {
-                throw new Exception("Driver não suportado!");
-            }
-
-            Instance.Manage().Timeouts().ImplicitWait = TimeSpan.FromSeconds(timeout);
-            Instance.Manage().Timeouts().PageLoad = TimeSpan.FromSeconds(timeout);
-
+            return _driver;
         }
     }
 }

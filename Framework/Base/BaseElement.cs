@@ -2,103 +2,114 @@
 using Framework.Helper;
 using OpenQA.Selenium.Interactions;
 using OpenQA.Selenium.Support.UI;
+using System.Configuration;
 
 namespace Framework.Base
 {
     public class BaseElement
     {
-        public static bool Exists(By locator)
+        IWebDriver _driver;
+        WaitUntil _waitUntil;
+        
+        public BaseElement(IWebDriver driver)
         {
-            return WaitUntil.ElementExists(locator);
+            _driver = driver;
+            _waitUntil = new WaitUntil(_driver);
         }
 
-        public static void Click(IWebElement element)
+        public bool Exists(By locator)
         {
-            IWebElement e = WaitUntil.ElementToBeClickable(element);
-            General.ScrollTo(GetElement(element));
-            new Actions(DriverFactory.Instance).MoveToElement(e).Click().Perform();
+            return _waitUntil.ElementExists(locator);
         }
 
-        public static void Click(By locator)
+        public void Click(IWebElement element)
         {
-            IWebElement e = WaitUntil.ElementToBeClickable(locator);
-            General.ScrollTo(GetElement(locator));
-            new Actions(DriverFactory.Instance).MoveToElement(e).Click().Perform();
+            IWebElement e = _waitUntil.ElementToBeClickable(element);
+            General.ScrollTo(_driver, e);
+            new Actions(_driver).MoveToElement(e).Click().Perform();
         }
 
-        public static void Type(IWebElement element, string value)
+        public void Click(By locator)
         {
-            WaitUntil.ElementToBeClickable(element).SendKeys(value + Keys.Tab);
+            IWebElement e = _waitUntil.ElementToBeClickable(locator);
+            General.ScrollTo(_driver, e);
+            new Actions(_driver).MoveToElement(e).Click().Perform();
         }
 
-        public static void Type(By locator, string value)
+        public void Type(IWebElement element, string value)
         {
-            WaitUntil.ElementToBeClickable(locator).SendKeys(value + Keys.Tab);
+            _waitUntil.ElementToBeClickable(element).SendKeys(value + Keys.Tab);
         }
 
-        public static IWebElement GetElement(IWebElement element)
+        public void Type(By locator, string value)
         {
-            return WaitUntil.ElementToBeClickable(element);
+            _waitUntil.ElementToBeClickable(locator).SendKeys(value + Keys.Tab);
         }
 
-        public static IWebElement GetElement(By locator)
+        public IWebElement GetElement(IWebElement element)
         {
-            return WaitUntil.ElementToBeClickable(locator);
+            return _waitUntil.ElementToBeClickable(element);
         }
 
-        public static string GetElementText(IWebElement element)
+        public IWebElement GetElement(By locator)
         {
-            return WaitUntil.ElementToBeClickable(element).GetAttribute("innerText");
+            return _waitUntil.ElementToBeClickable(locator);
         }
 
-        public static string GetElementText(By locator)
+        public string GetElementText(IWebElement element)
         {
-            return WaitUntil.ElementToBeClickable(locator).GetAttribute("innerText");
+            return _waitUntil.ElementToBeClickable(element).GetAttribute("innerText");
         }
 
-        public static void Wait(IWebElement element)
+        public string GetElementText(By locator)
         {
-            WaitUntil.ElementToBeClickable(element);
+            return _waitUntil.ElementToBeClickable(locator).GetAttribute("innerText");
         }
 
-        public static void Wait(By locator)
+        public void Wait(IWebElement element)
         {
-            WaitUntil.ElementToBeClickable(locator);
+            _waitUntil.ElementToBeClickable(element);
         }
 
-        public static void Clear(IWebElement element)
+        public void Wait(By locator)
         {
-            WaitUntil.ElementToBeClickable(element).Clear();
+            _waitUntil.ElementToBeClickable(locator);
         }
 
-        public static void Clear(By locator)
+        public void Clear(IWebElement element)
         {
-            WaitUntil.ElementToBeClickable(locator).Clear();
+            _waitUntil.ElementToBeClickable(element).Clear();
         }
 
-        public static void Select(IWebElement element, string value)
+        public void Clear(By locator)
+        {
+            _waitUntil.ElementToBeClickable(locator).Clear();
+        }
+
+        public void Select(IWebElement element, string value)
         {
             new SelectElement(GetElement(element)).SelectByText(value);
         }
 
-        public static void Select(By locator, string value)
+        public void Select(By locator, string value)
         {
             new SelectElement(GetElement(locator)).SelectByText(value);
         }
 
-        public static string GetSelectedText(IWebElement element)
+        public string GetSelectedText(IWebElement element)
         {
             return new SelectElement(GetElement(element)).SelectedOption.Text;
         }
 
-        public static string GetSelectedText(By locator)
+        public string GetSelectedText(By locator)
         {
             return new SelectElement(GetElement(locator)).SelectedOption.Text;
         }
 
-        public static bool IsEnabled(By element)
+        public bool IsEnabled(By element)
         {
-            return WaitUntil.ElementToBeVisible(element).Enabled;
+            return _waitUntil.ElementToBeVisible(element).Enabled;
         }
+        
     }
 }

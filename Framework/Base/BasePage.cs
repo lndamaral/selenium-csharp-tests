@@ -1,42 +1,35 @@
-﻿using System;
-using System.Configuration;
-using System.Threading;
-using Framework.Helper;
-using OpenQA.Selenium.Support.PageObjects;
-using OpenQA.Selenium.Support.UI;
+﻿using OpenQA.Selenium;
 
 namespace Framework.Base
                         
 {
-    public class BasePage
+    public class BasePage : BaseElement
     {
-        protected WebDriverWait Wait { get; private set; }
-
-        public BasePage()
+        private IWebDriver _driver;
+        
+        public BasePage(IWebDriver driver) : base(driver)
         {
-            PageFactory.InitElements(DriverFactory.Instance, this);
-            Wait = new WebDriverWait(DriverFactory.Instance, TimeSpan.FromSeconds(Convert.ToDouble(ConfigurationManager.AppSettings["DefaultTimeout"])));
+            _driver = driver;
         }
 
         public void Refresh()
         {
-            DriverFactory.Instance.Navigate().Refresh();
+            _driver.Navigate().Refresh();
         }
 
         public void NavigateTo(string url)
         {
-            DriverFactory.Instance.Navigate().GoToUrl(url);
+            _driver.Navigate().GoToUrl(url);
         }
 
         public void AcceptAlert()
         {
-            DriverFactory.Instance.SwitchTo().Alert().Accept();
-            Thread.Sleep(2000);
+            _driver.SwitchTo().Alert().Accept();
         }
 
         public void DismissAlert()
         {
-            DriverFactory.Instance.SwitchTo().Alert().Dismiss();
+            _driver.SwitchTo().Alert().Dismiss();
         }
     }
 }

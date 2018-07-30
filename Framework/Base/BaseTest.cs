@@ -2,25 +2,28 @@
 using System.Configuration;
 using Framework.Helper;
 using NUnit.Framework;
+using OpenQA.Selenium;
 
 namespace Framework.Base
 {
     public class BaseTest
     {
+        protected IWebDriver _driver;
+
         [SetUp]
         public void SetupTest()
         {
-            DriverFactory.Initialize(ConfigurationManager.AppSettings["DefaultBrowser"]);
-            DriverFactory.Instance.Navigate().GoToUrl(ConfigurationManager.AppSettings["BaseURL"]);
-            DriverFactory.Instance.Manage().Window.Maximize();
-
+            _driver = new DriverFactory().Initialize(ConfigurationManager.AppSettings["DefaultBrowser"]);
+            _driver.Navigate().GoToUrl(ConfigurationManager.AppSettings["BaseURL"]);
+            
             Console.WriteLine(TestContext.CurrentContext.Test.FullName);
         }
 
         [TearDown]
         public void TearDownTest()
         {
-            DriverFactory.Instance.Quit();
+            _driver.Quit();
+            _driver = null;
         }
     }
 }
