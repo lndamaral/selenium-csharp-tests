@@ -30,7 +30,7 @@ This is a automation architecture for C# language.
             General.cs
             WaitUntil.cs
             
-    /Test.UI.[System Name]:             # Project tha references the system is being automated.
+    /Test.UI.[System Name]:             # Project that references the system is being automated.
         
         Page/                           # Folder where classes that implement pages mapping according to PageObjects.
             [PageName]Page.cs
