@@ -2,7 +2,6 @@
 using System.Configuration;
 using OpenQA.Selenium.Chrome;
 using OpenQA.Selenium.Remote;
-using OpenQA.Selenium;
 
 namespace Framework.Driver
 {
@@ -25,9 +24,6 @@ namespace Framework.Driver
             var chromeOptions = new ChromeOptions();
             chromeOptions.AddUserProfilePreference("e.default_directory", AppDomain.CurrentDomain.BaseDirectory.Replace("bin\\Debug\\", "Downloads"));
             chromeOptions.AddUserProfilePreference("disable-popup-blocking", "true");
-
-            var abc = AppDomain.CurrentDomain.BaseDirectory.Replace("bin\\Debug\\", "Files\\") + "Auto.Sky Plugin.crx";
-            chromeOptions.AddExtensions(AppDomain.CurrentDomain.BaseDirectory.Replace("bin\\Debug\\", "Files\\") + "Auto.Sky Plugin.crx");
 
             return new ChromeDriver(chromeOptions);
         }
